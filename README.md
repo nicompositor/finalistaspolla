@@ -43,10 +43,6 @@
     }
 
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-      gap: 28px;
-      align-items: stretch;
       margin-bottom: 24px;
     }
 
@@ -105,62 +101,6 @@
       color: var(--muted);
       font-size: 1.04rem;
       line-height: 1.65;
-    }
-
-    .scoreboard {
-      display: grid;
-      gap: 12px;
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(7, 19, 15, 0.72);
-      box-shadow: var(--shadow);
-    }
-
-    .scoreboard-row {
-      display: grid;
-      grid-template-columns: 54px 1fr auto;
-      gap: 12px;
-      align-items: center;
-      min-height: 64px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(18, 49, 38, 0.72);
-    }
-
-    .medal {
-      display: grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      color: #07130f;
-      font-weight: 900;
-      background: var(--gold);
-    }
-
-    .medal.silver {
-      background: #d7dde2;
-    }
-
-    .medal.bronze {
-      background: #c98745;
-    }
-
-    .medal.dark {
-      color: var(--text);
-      background: #335146;
-    }
-
-    .scoreboard strong {
-      display: block;
-      font-size: 0.95rem;
-    }
-
-    .scoreboard span {
-      color: var(--muted);
-      font-size: 0.86rem;
     }
 
     .pitch {
@@ -344,6 +284,13 @@
       line-height: 1.2;
     }
 
+    .winner-card .points {
+      margin: 12px 0 0;
+      color: var(--text);
+      font-size: 0.98rem;
+      font-weight: 850;
+    }
+
     .detail-row {
       display: flex;
       flex-wrap: wrap;
@@ -365,7 +312,6 @@
         padding: 24px 0;
       }
 
-      .hero,
       .form-grid {
         grid-template-columns: 1fr;
       }
@@ -384,16 +330,7 @@
     }
 
     @media (max-width: 520px) {
-      .scoreboard-row {
-        grid-template-columns: 46px 1fr;
-      }
-
-      .scoreboard-row > span:last-child {
-        grid-column: 2;
-      }
-
       .pitch,
-      .scoreboard,
       .intro {
         padding: 18px;
       }
@@ -411,41 +348,6 @@
           qué participante o participantes ganarían la polla en ese escenario.
         </p>
       </div>
-
-      <aside class="scoreboard" aria-label="Orden de posiciones">
-        <div class="scoreboard-row">
-          <div class="medal">1</div>
-          <div>
-            <strong>Campeón</strong>
-            <span>Primer puesto</span>
-          </div>
-          <span>Copa</span>
-        </div>
-        <div class="scoreboard-row">
-          <div class="medal silver">2</div>
-          <div>
-            <strong>Subcampeón</strong>
-            <span>Segundo puesto</span>
-          </div>
-          <span>Finalista</span>
-        </div>
-        <div class="scoreboard-row">
-          <div class="medal bronze">3</div>
-          <div>
-            <strong>Tercero</strong>
-            <span>Ganador del tercer puesto</span>
-          </div>
-          <span>Podio</span>
-        </div>
-        <div class="scoreboard-row">
-          <div class="medal dark">4</div>
-          <div>
-            <strong>Cuarto</strong>
-            <span>Cuarto puesto</span>
-          </div>
-          <span>Top 4</span>
-        </div>
-      </aside>
     </section>
 
     <section class="pitch" aria-label="Buscador de escenarios">
@@ -500,8 +402,8 @@
         opcion: numero de la opcion,
         orden: ["Campeón", "Subcampeón", "Tercero", "Cuarto"],
         ganadores: [
-          { nombre: "Nombre 1", puesto: 1 },
-          { nombre: "Nombre 2", puesto: 2 }
+          { nombre: "Nombre 1", puntos: 2925, puesto: 1 },
+          { nombre: "Nombre 2", puntos: 2785, puesto: 2 }
         ]
       }
 
@@ -510,151 +412,151 @@
     */
     const DATOS_POLLA = [
       { opcion: 1, orden: ["Francia", "Argentina", "Inglaterra", "España"], ganadores: [
-        { nombre: "CATALINA ORTIZ ANAYA", puesto: 1 },
-        { nombre: "ANDRES SANIN", puesto: 2 },
-        { nombre: "GUSTAVO CAMACHO", puesto: 3 },
-        { nombre: "GUILLERMO JAVIER AMAYA", puesto: 4 },
-        { nombre: "ECHEVERRIA MEJIA", puesto: 5 },
-        { nombre: "JUAN CARLOS HOYOS", puesto: 6 },
-        { nombre: "CARLOS A HERNANDEZ", puesto: 7 }
+        { nombre: "CATALINA ORTIZ ANAYA", puntos: 2925, puesto: 1 },
+        { nombre: "ANDRES SANIN", puntos: 2785, puesto: 2 },
+        { nombre: "GUSTAVO CAMACHO", puntos: 2690, puesto: 3 },
+        { nombre: "GUILLERMO JAVIER AMAYA", puntos: 2665, puesto: 4 },
+        { nombre: "ECHEVERRIA MEJIA", puntos: 2605, puesto: 5 },
+        { nombre: "JUAN CARLOS HOYOS", puntos: 2565, puesto: 6 },
+        { nombre: "CARLOS A HERNANDEZ", puntos: 2515, puesto: 7 }
       ] },
       { opcion: 2, orden: ["Francia", "Argentina", "España", "Inglaterra"], ganadores: [
-        { nombre: "ANDRES SANIN", puesto: 1 },
-        { nombre: "GUSTAVO CAMACHO", puesto: 2 },
-        { nombre: "ECHEVERRIA MEJIA", puesto: 3 },
-        { nombre: "GUILLERMO JAVIER AMAYA", puesto: 4 },
-        { nombre: "JUAN CARLOS HOYOS", puesto: 5 },
-        { nombre: "CATALINA ORTIZ ANAYA", puesto: 6 },
-        { nombre: "TANYA FIGUEROA BEDOYA", puesto: 7 }
+        { nombre: "ANDRES SANIN", puntos: 2915, puesto: 1 },
+        { nombre: "GUSTAVO CAMACHO", puntos: 2820, puesto: 2 },
+        { nombre: "ECHEVERRIA MEJIA", puntos: 2815, puesto: 3 },
+        { nombre: "GUILLERMO JAVIER AMAYA", puntos: 2795, puesto: 4 },
+        { nombre: "JUAN CARLOS HOYOS", puntos: 2775, puesto: 5 },
+        { nombre: "CATALINA ORTIZ ANAYA", puntos: 2715, puesto: 6 },
+        { nombre: "TANYA FIGUEROA BEDOYA", puntos: 2700, puesto: 7 }
       ] },
       { opcion: 3, orden: ["Argentina", "Francia", "España", "Inglaterra"], ganadores: [
-        { nombre: "PEDRO SALAMANCA", puesto: 1 },
-        { nombre: "RUBEN DARIO ORTIZ", puesto: 2 },
-        { nombre: "CARLOS MOSOS", puesto: 3 },
-        { nombre: "P FERNANDO SALAMANCA", puesto: 4 },
-        { nombre: "PAULO ANDRES FLOREZ", puesto: 5 },
-        { nombre: "PABLO TORO", puesto: 6 },
-        { nombre: "HERNANDO FORERO", puesto: 7 }
+        { nombre: "PEDRO SALAMANCA", puntos: 2810, puesto: 1 },
+        { nombre: "RUBEN DARIO ORTIZ", puntos: 2785, puesto: 2 },
+        { nombre: "CARLOS MOSOS", puntos: 2575, puesto: 3 },
+        { nombre: "P FERNANDO SALAMANCA", puntos: 2565, puesto: 4 },
+        { nombre: "PAULO ANDRES FLOREZ", puntos: 2555, puesto: 5 },
+        { nombre: "PABLO TORO", puntos: 2520, puesto: 6 },
+        { nombre: "HERNANDO FORERO", puntos: 2510, puesto: 7 }
       ] },
       { opcion: 4, orden: ["Argentina", "Francia", "Inglaterra", "España"], ganadores: [
-        { nombre: "PEDRO SALAMANCA", puesto: 1 },
-        { nombre: "CARLOS MOSOS", puesto: 2 },
-        { nombre: "RUBEN DARIO ORTIZ", puesto: 2 },
-        { nombre: "P FERNANDO SALAMANCA", puesto: 4 },
-        { nombre: "HERNANDO FORERO", puesto: 5 },
-        { nombre: "JORGE MARIO SEGOVIA", puesto: 6 },
-        { nombre: "CATALINA ORTIZ ANAYA", puesto: 7 },
-        { nombre: "PAULO ANDRES FLOREZ", puesto: 7 }
+        { nombre: "PEDRO SALAMANCA", puntos: 2680, puesto: 1 },
+        { nombre: "CARLOS MOSOS", puntos: 2655, puesto: 2 },
+        { nombre: "RUBEN DARIO ORTIZ", puntos: 2655, puesto: 2 },
+        { nombre: "P FERNANDO SALAMANCA", puntos: 2645, puesto: 4 },
+        { nombre: "HERNANDO FORERO", puntos: 2590, puesto: 5 },
+        { nombre: "JORGE MARIO SEGOVIA", puntos: 2565, puesto: 6 },
+        { nombre: "CATALINA ORTIZ ANAYA", puntos: 2475, puesto: 7 },
+        { nombre: "PAULO ANDRES FLOREZ", puntos: 2475, puesto: 7 }
       ] },
       { opcion: 5, orden: ["Francia", "Inglaterra", "Argentina", "España"], ganadores: [
-        { nombre: "DOUGLAS ALI", puesto: 1 },
-        { nombre: "ALBERTO MELO", puesto: 2 },
-        { nombre: "DIEGO ALBERTO BARRAGAN", puesto: 3 },
-        { nombre: "GERMAN CAMACHO", puesto: 4 },
-        { nombre: "DIEGO PEREA", puesto: 5 },
-        { nombre: "DIANA SANCHEZ", puesto: 6 },
-        { nombre: "HERNANDO FORERO", puesto: 6 }
+        { nombre: "DOUGLAS ALI", puntos: 2830, puesto: 1 },
+        { nombre: "ALBERTO MELO", puntos: 2730, puesto: 2 },
+        { nombre: "DIEGO ALBERTO BARRAGAN", puntos: 2715, puesto: 3 },
+        { nombre: "GERMAN CAMACHO", puntos: 2705, puesto: 4 },
+        { nombre: "DIEGO PEREA", puntos: 2620, puesto: 5 },
+        { nombre: "DIANA SANCHEZ", puntos: 2610, puesto: 6 },
+        { nombre: "HERNANDO FORERO", puntos: 2610, puesto: 6 }
       ] },
       { opcion: 6, orden: ["Francia", "Inglaterra", "España", "Argentina"], ganadores: [
-        { nombre: "ALBERTO MELO", puesto: 1 },
-        { nombre: "DIEGO ALBERTO BARRAGAN", puesto: 2 },
-        { nombre: "GERMAN CAMACHO", puesto: 3 },
-        { nombre: "DIEGO PEREA", puesto: 4 },
-        { nombre: "JUAN CARLOS FIGUEROA", puesto: 5 },
-        { nombre: "JOSE L MARTINEZ", puesto: 6 },
-        { nombre: "ENRIQUE LOPIERRE", puesto: 7 }
+        { nombre: "ALBERTO MELO", puntos: 2940, puesto: 1 },
+        { nombre: "DIEGO ALBERTO BARRAGAN", puntos: 2925, puesto: 2 },
+        { nombre: "GERMAN CAMACHO", puntos: 2835, puesto: 3 },
+        { nombre: "DIEGO PEREA", puntos: 2830, puesto: 4 },
+        { nombre: "JUAN CARLOS FIGUEROA", puntos: 2800, puesto: 5 },
+        { nombre: "JOSE L MARTINEZ", puntos: 2735, puesto: 6 },
+        { nombre: "ENRIQUE LOPIERRE", puntos: 2700, puesto: 7 }
       ] },
       { opcion: 7, orden: ["Inglaterra", "Francia", "España", "Argentina"], ganadores: [
-        { nombre: "HERNANDO FORERO", puesto: 1 },
-        { nombre: "MARCELY GONZALEZ", puesto: 2 },
-        { nombre: "ALBERTO MELO", puesto: 3 },
-        { nombre: "DIEGO ALBERTO BARRAGAN", puesto: 4 },
-        { nombre: "KATHERINE TINJACA", puesto: 5 },
-        { nombre: "PEDRO SALAMANCA", puesto: 5 },
-        { nombre: "RUBEN DARIO ORTIZ", puesto: 7 }
+        { nombre: "HERNANDO FORERO", puntos: 2850, puesto: 1 },
+        { nombre: "MARCELY GONZALEZ", puntos: 2835, puesto: 2 },
+        { nombre: "ALBERTO MELO", puntos: 2490, puesto: 3 },
+        { nombre: "DIEGO ALBERTO BARRAGAN", puntos: 2475, puesto: 4 },
+        { nombre: "KATHERINE TINJACA", puntos: 2470, puesto: 5 },
+        { nombre: "PEDRO SALAMANCA", puntos: 2470, puesto: 5 },
+        { nombre: "RUBEN DARIO ORTIZ", puntos: 2445, puesto: 7 }
       ] },
       { opcion: 8, orden: ["Inglaterra", "Francia", "Argentina", "España"], ganadores: [
-        { nombre: "HERNANDO FORERO", puesto: 1 },
-        { nombre: "MARCELY GONZALEZ", puesto: 2 },
-        { nombre: "CHRISTIAN CAMILO NIETO", puesto: 3 },
-        { nombre: "KATHERINE TINJACA", puesto: 4 },
-        { nombre: "DOUGLAS ALI", puesto: 5 },
-        { nombre: "FABIO SANCHEZ UMBARILA", puesto: 6 },
-        { nombre: "PEDRO SALAMANCA", puesto: 7 }
+        { nombre: "HERNANDO FORERO", puntos: 3060, puesto: 1 },
+        { nombre: "MARCELY GONZALEZ", puntos: 2625, puesto: 2 },
+        { nombre: "CHRISTIAN CAMILO NIETO", puntos: 2445, puesto: 3 },
+        { nombre: "KATHERINE TINJACA", puntos: 2390, puesto: 4 },
+        { nombre: "DOUGLAS ALI", puntos: 2380, puesto: 5 },
+        { nombre: "FABIO SANCHEZ UMBARILA", puntos: 2345, puesto: 6 },
+        { nombre: "PEDRO SALAMANCA", puntos: 2340, puesto: 7 }
       ] },
       { opcion: 9, orden: ["Inglaterra", "España", "Argentina", "Francia"], ganadores: [
-        { nombre: "HERNANDO FORERO", puesto: 1 },
-        { nombre: "KATHERINE TINJACA", puesto: 2 },
-        { nombre: "CARLOS H LOPEZ", puesto: 3 },
-        { nombre: "JOHANNA KLEIN", puesto: 4 },
-        { nombre: "FAMILIA STERLING", puesto: 5 },
-        { nombre: "PABLO TORO", puesto: 6 },
-        { nombre: "CHRISTIAN CAMILO NIETO", puesto: 7 }
+        { nombre: "HERNANDO FORERO", puntos: 2710, puesto: 1 },
+        { nombre: "KATHERINE TINJACA", puntos: 2660, puesto: 2 },
+        { nombre: "CARLOS H LOPEZ", puntos: 2595, puesto: 3 },
+        { nombre: "JOHANNA KLEIN", puntos: 2475, puesto: 4 },
+        { nombre: "FAMILIA STERLING", puntos: 2435, puesto: 5 },
+        { nombre: "PABLO TORO", puntos: 2370, puesto: 6 },
+        { nombre: "CHRISTIAN CAMILO NIETO", puntos: 2365, puesto: 7 }
       ] },
       { opcion: 10, orden: ["Inglaterra", "España", "Francia", "Argentina"], ganadores: [
-        { nombre: "KATHERINE TINJACA", puesto: 1 },
-        { nombre: "HERNANDO FORERO", puesto: 2 },
-        { nombre: "CARLOS H LOPEZ", puesto: 3 },
-        { nombre: "PABLO TORO", puesto: 4 },
-        { nombre: "JOHANNA KLEIN", puesto: 5 },
-        { nombre: "MARCELY GONZALEZ", puesto: 6 },
-        { nombre: "MIGUEL ANGEL OLIVA", puesto: 7 }
+        { nombre: "KATHERINE TINJACA", puntos: 2870, puesto: 1 },
+        { nombre: "HERNANDO FORERO", puntos: 2580, puesto: 2 },
+        { nombre: "CARLOS H LOPEZ", puntos: 2515, puesto: 3 },
+        { nombre: "PABLO TORO", puntos: 2500, puesto: 4 },
+        { nombre: "JOHANNA KLEIN", puntos: 2475, puesto: 5 },
+        { nombre: "MARCELY GONZALEZ", puntos: 2435, puesto: 6 },
+        { nombre: "MIGUEL ANGEL OLIVA", puntos: 2410, puesto: 7 }
       ] },
       { opcion: 11, orden: ["España", "Inglaterra", "Francia", "Argentina"], ganadores: [
-        { nombre: "VICTOR HUGO PEÑA JIMENEZ", puesto: 1 },
-        { nombre: "TATIANA CELY", puesto: 2 },
-        { nombre: "PABLO RIOS", puesto: 3 },
-        { nombre: "JONATHAN NARVAEZ", puesto: 4 },
-        { nombre: "RAFAEL GONZALEZ GOMEZ", puesto: 5 },
-        { nombre: "CLEMENTE GAONA", puesto: 6 },
-        { nombre: "FDO RAFAEL VARELA", puesto: 6 }
+        { nombre: "VICTOR HUGO PEÑA JIMENEZ", puntos: 2790, puesto: 1 },
+        { nombre: "TATIANA CELY", puntos: 2665, puesto: 2 },
+        { nombre: "PABLO RIOS", puntos: 2620, puesto: 3 },
+        { nombre: "JONATHAN NARVAEZ", puntos: 2590, puesto: 4 },
+        { nombre: "RAFAEL GONZALEZ GOMEZ", puntos: 2585, puesto: 5 },
+        { nombre: "CLEMENTE GAONA", puntos: 2570, puesto: 6 },
+        { nombre: "FDO RAFAEL VARELA", puntos: 2570, puesto: 6 }
       ] },
       { opcion: 12, orden: ["España", "Inglaterra", "Argentina", "Francia"], ganadores: [
-        { nombre: "TATIANA CELY", puesto: 1 },
-        { nombre: "VICTOR HUGO PEÑA JIMENEZ", puesto: 2 },
-        { nombre: "SEBASTIAN VARELA", puesto: 3 },
-        { nombre: "PABLO RIOS", puesto: 4 },
-        { nombre: "JONATHAN NARVAEZ", puesto: 5 },
-        { nombre: "RAFAEL GONZALEZ GOMEZ", puesto: 6 },
-        { nombre: "HERNANDO FORERO", puesto: 7 }
+        { nombre: "TATIANA CELY", puntos: 2745, puesto: 1 },
+        { nombre: "VICTOR HUGO PEÑA JIMENEZ", puntos: 2580, puesto: 2 },
+        { nombre: "SEBASTIAN VARELA", puntos: 2500, puesto: 3 },
+        { nombre: "PABLO RIOS", puntos: 2490, puesto: 4 },
+        { nombre: "JONATHAN NARVAEZ", puntos: 2460, puesto: 5 },
+        { nombre: "RAFAEL GONZALEZ GOMEZ", puntos: 2455, puesto: 6 },
+        { nombre: "HERNANDO FORERO", puntos: 2450, puesto: 7 }
       ] },
       { opcion: 13, orden: ["España", "Argentina", "Inglaterra", "Francia"], ganadores: [
-        { nombre: "JONATHAN NARVAEZ", puesto: 1 },
-        { nombre: "MARIA ALEJANDRA ARDILA", puesto: 2 },
-        { nombre: "JORGE ANDRES NAVAS", puesto: 3 },
-        { nombre: "RICARDO RODRIGUEZ", puesto: 4 },
-        { nombre: "MARIA JULIANA CALA", puesto: 5 },
-        { nombre: "OSWALDO ALEMAN", puesto: 6 },
-        { nombre: "JOSE LEONARDO ESCOBAR", puesto: 7 },
-        { nombre: "MIGUEL OLIVA VALLEJOS", puesto: 7 }
+        { nombre: "JONATHAN NARVAEZ", puntos: 2730, puesto: 1 },
+        { nombre: "MARIA ALEJANDRA ARDILA", puntos: 2690, puesto: 2 },
+        { nombre: "JORGE ANDRES NAVAS", puntos: 2670, puesto: 3 },
+        { nombre: "RICARDO RODRIGUEZ", puntos: 2620, puesto: 4 },
+        { nombre: "MARIA JULIANA CALA", puntos: 2610, puesto: 5 },
+        { nombre: "OSWALDO ALEMAN", puntos: 2605, puesto: 6 },
+        { nombre: "JOSE LEONARDO ESCOBAR", puntos: 2600, puesto: 7 },
+        { nombre: "MIGUEL OLIVA VALLEJOS", puntos: 2600, puesto: 7 }
       ] },
       { opcion: 14, orden: ["España", "Argentina", "Francia", "Inglaterra"], ganadores: [
-        { nombre: "JONATHAN NARVAEZ", puesto: 1 },
-        { nombre: "RICARDO RODRIGUEZ", puesto: 2 },
-        { nombre: "MARIA ALEJANDRA ARDILA", puesto: 3 },
-        { nombre: "JOSE LEONARDO ESCOBAR", puesto: 4 },
-        { nombre: "CARLOS MARTINEZ VH", puesto: 5 },
-        { nombre: "VILMA FIGUEROA", puesto: 5 },
-        { nombre: "MARIANA RODRIGUEZ", puesto: 7 }
+        { nombre: "JONATHAN NARVAEZ", puntos: 2940, puesto: 1 },
+        { nombre: "RICARDO RODRIGUEZ", puntos: 2830, puesto: 2 },
+        { nombre: "MARIA ALEJANDRA ARDILA", puntos: 2820, puesto: 3 },
+        { nombre: "JOSE LEONARDO ESCOBAR", puntos: 2810, puesto: 4 },
+        { nombre: "CARLOS MARTINEZ VH", puntos: 2805, puesto: 5 },
+        { nombre: "VILMA FIGUEROA", puntos: 2805, puesto: 5 },
+        { nombre: "MARIANA RODRIGUEZ", puntos: 2775, puesto: 7 }
       ] },
       { opcion: 15, orden: ["Argentina", "España", "Francia", "Inglaterra"], ganadores: [
-        { nombre: "PABLO TORO", puesto: 1 },
-        { nombre: "JOSE ANDRÉS RIOS", puesto: 2 },
-        { nombre: "JAIRO ENRIQUE CASTRO", puesto: 3 },
-        { nombre: "MILCIADES DUSAN", puesto: 4 },
-        { nombre: "JONATHAN NARVAEZ", puesto: 5 },
-        { nombre: "KATHERINE TINJACA", puesto: 6 },
-        { nombre: "JOSE WILMER VARELA", puesto: 7 },
-        { nombre: "PABLO RIOS", puesto: 7 }
+        { nombre: "PABLO TORO", puntos: 2920, puesto: 1 },
+        { nombre: "JOSE ANDRÉS RIOS", puntos: 2715, puesto: 2 },
+        { nombre: "JAIRO ENRIQUE CASTRO", puntos: 2705, puesto: 3 },
+        { nombre: "MILCIADES DUSAN", puntos: 2595, puesto: 4 },
+        { nombre: "JONATHAN NARVAEZ", puntos: 2490, puesto: 5 },
+        { nombre: "KATHERINE TINJACA", puntos: 2450, puesto: 6 },
+        { nombre: "JOSE WILMER VARELA", puntos: 2440, puesto: 7 },
+        { nombre: "PABLO RIOS", puntos: 2440, puesto: 7 }
       ] },
       { opcion: 16, orden: ["Argentina", "España", "Inglaterra", "Francia"], ganadores: [
-        { nombre: "PABLO TORO", puesto: 1 },
-        { nombre: "JOSE ANDRÉS RIOS", puesto: 2 },
-        { nombre: "JAIRO ENRIQUE CASTRO", puesto: 3 },
-        { nombre: "MILCIADES DUSAN", puesto: 4 },
-        { nombre: "PEDRO SALAMANCA", puesto: 5 },
-        { nombre: "RUBEN DARIO ORTIZ", puesto: 6 },
-        { nombre: "KATHERINE TINJACA", puesto: 7 }
+        { nombre: "PABLO TORO", puntos: 2710, puesto: 1 },
+        { nombre: "JOSE ANDRÉS RIOS", puntos: 2585, puesto: 2 },
+        { nombre: "JAIRO ENRIQUE CASTRO", puntos: 2575, puesto: 3 },
+        { nombre: "MILCIADES DUSAN", puntos: 2465, puesto: 4 },
+        { nombre: "PEDRO SALAMANCA", puntos: 2410, puesto: 5 },
+        { nombre: "RUBEN DARIO ORTIZ", puntos: 2385, puesto: 6 },
+        { nombre: "KATHERINE TINJACA", puntos: 2320, puesto: 7 }
       ] }
     ];
 
@@ -662,6 +564,12 @@
       Lista fija de equipos disponibles. No se agregan mas opciones al buscador.
     */
     const EQUIPOS = ["Francia", "Argentina", "España", "Inglaterra"];
+    const BANDERAS = {
+      Francia: "🇫🇷",
+      Argentina: "🇦🇷",
+      España: "🇪🇸",
+      Inglaterra: "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
+    };
 
     const CAMPOS = [
       { id: "campeon", etiqueta: "Seleccionar Campeón" },
@@ -693,7 +601,7 @@
         select.appendChild(crearOpcion("", etiqueta));
 
         EQUIPOS.forEach((equipo) => {
-          select.appendChild(crearOpcion(equipo, equipo));
+          select.appendChild(crearOpcion(equipo, formatearEquipo(equipo)));
         });
 
         if (valorActual) {
@@ -744,7 +652,7 @@
             <span class="scenario-title">Escenario consultado</span>
             <ol class="scenario-list">
               ${escenario.orden.map((equipo, indice) => `
-                <li>${indice + 1}. ${escaparHtml(equipo)}</li>
+                <li>${indice + 1}. ${escaparHtml(formatearEquipo(equipo))}</li>
               `).join("")}
             </ol>
           </div>
@@ -754,6 +662,7 @@
               <article class="winner-card">
                 <small>Puesto ${escaparHtml(String(ganador.puesto))}</small>
                 <strong>${escaparHtml(ganador.nombre)}</strong>
+                <p class="points">${escaparHtml(formatearPuntos(ganador.puntos))} puntos</p>
               </article>
             `).join("")}
           </div>
@@ -772,7 +681,7 @@
           <div>
             <strong>No hay registros para esta combinación exacta de resultados.</strong>
             <br>
-            Escenario consultado: ${seleccion.map(escaparHtml).join(" / ")}
+            Escenario consultado: ${seleccion.map(formatearEquipo).map(escaparHtml).join(" / ")}
           </div>
         </div>
       `;
@@ -793,6 +702,14 @@
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+    }
+
+    function formatearEquipo(equipo) {
+      return `${BANDERAS[equipo] || ""} ${equipo}`.trim();
+    }
+
+    function formatearPuntos(puntos) {
+      return new Intl.NumberFormat("es-CO").format(puntos);
     }
   </script>
 </body>
